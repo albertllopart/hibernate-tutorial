@@ -29,11 +29,31 @@ public class QueryStudentDemo {
 			//query students
 			List<Student> theStudents = session.createQuery("from Student").getResultList();
 			
-			//query students: lastName="Doe"
+			//display the students
+			System.out.println("\nStudents:");
+			displayStudents(theStudents);
+			
+			//query students: lastName='Doe'
 			theStudents = session.createQuery("from Student s where s.lastName='Doe'").getResultList();
 			
 			//display the students
 			System.out.println("\nStudents who have last name of Doe:");
+			displayStudents(theStudents);
+			
+			//query students: lastName='Doe' OR firstName='Daffy'
+			theStudents = session.createQuery("from Student s where"
+					+ " s.lastName='Doe' OR s.firstName='Dídac'").getResultList();
+			
+			//display the students
+			System.out.println("\nStudents who have last name of Doe OR firstName of Dídac:");
+			displayStudents(theStudents);
+			
+			//query students where email LIKE '%29292@asdfg.com'
+			theStudents = session.createQuery("from Student s where"
+					+ " s.email LIKE '%29292@asdfg.com'").getResultList();
+			
+			//display the students
+			System.out.println("\nStudents whose email ends with 29292@asdfg.com:");
 			displayStudents(theStudents);
 			
 			//commit transaction
