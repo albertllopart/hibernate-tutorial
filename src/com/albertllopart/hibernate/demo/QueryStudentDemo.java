@@ -1,5 +1,7 @@
 package com.albertllopart.hibernate.demo;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -21,16 +23,18 @@ public class QueryStudentDemo {
 		
 		try {
 			
-			//create the student object
-			System.out.println("Creating a new student object...");
-			Student theStudent = new Student("Albert", "Llopart", "asdfg@asdfg.com");
-			
 			//start a transaction
 			session.beginTransaction();
 			
-			//save the student object
-			System.out.println("Saving the student...");
-			session.save(theStudent);
+			//query students
+			List<Student> theStudents = session.createQuery("from Student").getResultList();
+			
+			//query students: lastName="Doe"
+			theStudents = session.createQuery("from Student s where s.lastName='Doe'").getResultList();
+			
+			//display the students
+			System.out.println("\nStudents who have last name of Doe:");
+			displayStudents(theStudents);
 			
 			//commit transaction
 			session.getTransaction().commit();
@@ -42,6 +46,12 @@ public class QueryStudentDemo {
 			
 			factory.close();
 			
+		}
+	}
+
+	private static void displayStudents(List<Student> theStudents) {
+		for (Student tempStudent : theStudents) {
+			System.out.println(tempStudent);
 		}
 	}
 
