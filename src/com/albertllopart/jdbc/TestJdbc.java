@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 
 public class TestJdbc {
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		
 		String jdbcUrl = "jdbc:mysql://localhost:3306/hb_student_tracker?useSSL=false"; //false serveix perquè no surtin warnings de SQL
